@@ -1,0 +1,31 @@
+		} else if (mode.getValue() == FlightMode.DiversionFuckerPacketless) {
+			mc.thePlayer.onGround = true;
+			mc.thePlayer.setSpeed(6.9f);
+			mc.timer.timerSpeed = 1.420f;
+			if (mc.thePlayer.moving()
+					&& !Client.instance.getModuleManager().getModuleByClass(Speed.class).isEnabled()) {
+				if (mc.thePlayer.isAirBorne) {
+					if (mc.thePlayer.ticksExisted % 12 == 0 && mc.theWorld
+							.getBlockState(new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ))
+							.getBlock() instanceof BlockAir) {
+						mc.thePlayer.setSpeed(12.4233333f);
+						mc.thePlayer.sendQueue
+								.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX,
+										mc.thePlayer.posY + 56.3E-9D, mc.thePlayer.posZ, mc.thePlayer.onGround));
+						mc.thePlayer.motionY = 0.6969;
+					} else {
+						mc.thePlayer.setSpeed((float) Math.sqrt(mc.thePlayer.motionX * mc.thePlayer.motionX
+								+ mc.thePlayer.motionZ * mc.thePlayer.motionZ));
+					}
+				} else {
+					mc.thePlayer.motionX = 0.0;
+					mc.thePlayer.motionZ = 0.0;
+				}
+				if (mc.thePlayer.movementInput.jump) {
+					mc.thePlayer.motionY = 0.85;
+				} else if (mc.thePlayer.movementInput.sneak) {
+					mc.thePlayer.motionY = -0.85;
+				}
+			}
+		}
+	}
