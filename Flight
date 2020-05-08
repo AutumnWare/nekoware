@@ -1,4 +1,5 @@
-		} else if (mode.getValue() == FlightMode.DiversionFuckerPacketless) {
+		} else if (mode.getValue() == FlightMode.DiversionPvPFucker) {
+		// fuck you grummy i will find a better way to antikick
 			mc.thePlayer.onGround = true;
 			mc.thePlayer.setSpeed(6.9f);
 			mc.timer.timerSpeed = 1.420f;
